@@ -12,9 +12,16 @@ public class PlantEntity : MonoBehaviour {
     // The GardenBed in which this plant is planted
     private GardenBed m_gardenBed;
 
-    // public void Initialize(GardenBed gardenBed) {
-    //     m_gardenBed = gardenBed;
-    // }
+    public void Initialize(GardenBed gardenBed) {
+        m_gardenBed = gardenBed;
+    }
+
+    private void OnMouseOver() {
+        if (Input.GetMouseButtonDown(0)) {
+            // Call interaction behaviour on garden bed
+            m_gardenBed.TryInteract();
+        }
+    }
 
     public bool CanWater() {
         return m_growthLevel < m_harvestLevel;
@@ -24,10 +31,6 @@ public class PlantEntity : MonoBehaviour {
         return !CanWater();
     }
 
-    public int GetPointsValue() {
-        return m_pointsValue;
-    }
-
     public void Grow() {
         // TODO: grow
         m_growthLevel++;
@@ -35,5 +38,14 @@ public class PlantEntity : MonoBehaviour {
         if (CanHarvest()) {
             temp_harvestableIcon.SetActive(true);
         }
+    }
+
+    public void Harvest() {
+        GameManager.instance.AddScore(m_pointsValue);
+        // Grant seeds from harvesting
+        // TODO: make more sophisticated, also guarantee seeds/increase seeds if player has low/no seeds
+        GameManager.instance.seedQuantity += Random.Range(0, 6);
+        // TODO: temp
+        Destroy(gameObject);
     }
 }

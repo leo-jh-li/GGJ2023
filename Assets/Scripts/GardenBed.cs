@@ -21,8 +21,16 @@ public class GardenBed : MonoBehaviour {
         return m_plantEntity != null;
     }
 
+    public void PlantSeed() {
+        // TODO: plant, randomize seed, possibly handle rare seeds
+        PlantEntity plant = Instantiate(GameManager.instance.GetRandomPlant(), transform);
+        m_plantEntity = plant;
+        plant.Initialize(this);
+        GameManager.instance.OnPerformMove();
+    }
+
     // Tries to perform context-sensitive interaction with this PlantEntity and returns true iff the interaction was successful.
-    private void TryInteract() {
+    public void TryInteract() {
         if (!CanInteract()) { return; }
         Interact();
     }
@@ -57,10 +65,8 @@ public class GardenBed : MonoBehaviour {
         return m_plantEntity.CanHarvest();
     }
 
-    private void Harvest() {
-        GameManager.instance.AddScore(m_plantEntity.GetPointsValue());
-        // TODO: temp
-        Destroy(m_plantEntity.gameObject);
+    private void HarvestPlant() {
+        m_plantEntity.Harvest();
         m_plantEntity = null;
     }
 
@@ -68,17 +74,10 @@ public class GardenBed : MonoBehaviour {
         if (CanWaterPlant()) {
             Water();
         } else if (CanHarvestPlant()) {
-            Harvest();
+            HarvestPlant();
         } else {
             return;
         }
-        GameManager.instance.OnPerformMove();
-    }
-
-    public void PlantSeed() {
-        // TODO: plant, randomize seed, possibly handle rare seeds
-        PlantEntity plant = Instantiate(GameManager.instance.GetRandomPlant(), transform);
-        m_plantEntity = plant;
         GameManager.instance.OnPerformMove();
     }
 

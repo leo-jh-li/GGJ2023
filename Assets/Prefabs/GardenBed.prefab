@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3921c2e4f166b4387b494d8a5e2bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_wateredBed: {fileID: 7535352206744211287}
+  TEMP_wateredBedSprite: {fileID: 7535352206744211287}
 --- !u!1 &7316355750266812793
 GameObject:
   m_ObjectHideFlags: 0

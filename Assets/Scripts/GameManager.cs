@@ -55,11 +55,29 @@ public class GameManager : Singleton<GameManager> {
     public delegate void OnScoreChangeDelegate(int newVal);
     public event OnScoreChangeDelegate OnScoreChange;
 
+
+    [SerializeField, Tooltip("The number of seeds the player begins the game with.")]
+    private int m_startingSeedQuantity = 0;
+    private int m_seedQuantity;
+    public int seedQuantity {
+        get {return m_seedQuantity;}
+        set {
+            if (m_seedQuantity == value) return;
+            m_seedQuantity = value;
+            if (OnSeedQuantityChange != null)
+                OnSeedQuantityChange(m_seedQuantity);
+        }
+    }
+    public delegate void OnSeedQuantityChangeDelegate(int newVal);
+    public event OnSeedQuantityChangeDelegate OnSeedQuantityChange;
+
+
     private void Start() {
         m_numberOfDays = 28;
         day = 1;
         score = 0;
         RefreshMoves();
+        seedQuantity = m_startingSeedQuantity;
     }
 
     private void RefreshMoves() {   
@@ -81,17 +99,27 @@ public class GameManager : Singleton<GameManager> {
         score += value;
     }
 
+    private bool IsFinalDay() {
+        return day == m_numberOfDays;
+    }
+
     private void EndDay() {
         Debug.Log($"End day {day}");
         foreach (GardenBed gardenBed in m_gardenBeds) {
             gardenBed.OnNewDay();
         }
-        day++;
-        RefreshMoves();
+        if (!IsFinalDay()) {
+            day++;
+            RefreshMoves();
+        } else {
+            EndGame();
+        }
     }
 
     private void EndGame() {
         // TODO
+        UIManager.instance.ShowGameOver();
+        Debug.Log("game over");
     }
 
     public void DebugSkipMove() {

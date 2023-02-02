@@ -1,26 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SeedTool : MonoBehaviour {
     [SerializeField] private SeedEntity m_seedEntityPrefab;
-    // Camera cache
-    private Camera m_cam;
+    [SerializeField] private TextMeshProUGUI m_seedQuantityDisplay;
 
-    private void Awake() {
-        m_cam = Camera.main;
+    private void OnEnable() {
+        GameManager.instance.OnSeedQuantityChange += UpdateSeedQuantity;
     }
 
-    // private void OnMouseOver() {
-    //     // TODO: check if player has any seeds
-    //     Debug.Log("SeedTool OnMouseOver");
-    //     if (Input.GetMouseButtonDown(0)) {
-    //         RetrieveSeed();
-    //     }
-    // }
+    private void OnDisable() {
+        GameManager.instance.OnSeedQuantityChange -= UpdateSeedQuantity;
+    }
+
+    private void UpdateSeedQuantity(int quantity) {
+        m_seedQuantityDisplay.text = quantity.ToString();
+    }
+
+    private bool CanRetrieveSeed() {
+        return GameManager.instance.seedQuantity > 0;
+    }
 
     public void RetrieveSeed() {
-        // TODO: check if player has any seeds
+        if (!CanRetrieveSeed()) { return; }
+        GameManager.instance.seedQuantity--;
         Instantiate(m_seedEntityPrefab, Utils.GetMouseWorldPos(), Quaternion.identity);
     }
 }

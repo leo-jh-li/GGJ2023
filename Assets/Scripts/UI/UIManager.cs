@@ -7,6 +7,7 @@ public class UIManager : Singleton<UIManager> {
     [SerializeField] private TextMeshProUGUI m_dayDisplay;
     [SerializeField] private TextMeshProUGUI m_movesDisplay;
     [SerializeField] private TextMeshProUGUI m_scoreDisplay;
+    [SerializeField] private GameObject TEMP_gameOver;
 
     private void OnEnable() {
         GameManager.instance.OnDayChange += UpdateDay;
@@ -30,5 +31,10 @@ public class UIManager : Singleton<UIManager> {
 
     public void UpdateScore(int score) {
         m_scoreDisplay.text = $"Score: {score}";
+    }
+
+    // TODO: temp
+    public void ShowGameOver() {
+        TEMP_gameOver.SetActive(true);
     }
 }
