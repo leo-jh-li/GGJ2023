@@ -10,6 +10,12 @@ public class PlantEntity : MonoBehaviour {
     private int m_growthLevel;
     // The level at which this plant is harvestable
     private int m_harvestLevel = 3;
+    // The GardenBed in which this plant is planted
+    private GardenBed m_gardenBed;
+
+    public void Initialize(GardenBed gardenBed) {
+        m_gardenBed = gardenBed;
+    }
 
     private void OnMouseOver() {
         if (Input.GetMouseButtonDown(0)) {
@@ -39,6 +45,13 @@ public class PlantEntity : MonoBehaviour {
         SetWatered(true);
     }
 
+    private void SetWatered(bool watered) {
+        m_gardenBed.SetWatered(watered);
+        // TODO: remove
+        temp_wateredIcon.SetActive(watered);
+        m_watered = watered;
+    }
+
     // TODO: temp?
     private bool CanHarvest() {
         return !CanWater();
@@ -48,6 +61,7 @@ public class PlantEntity : MonoBehaviour {
         GameManager.instance.AddScore(m_pointsValue);
         // TODO: temp
         Destroy(gameObject);
+        m_gardenBed.OnHarvest();
     }
 
     private void Interact() {
@@ -76,10 +90,5 @@ public class PlantEntity : MonoBehaviour {
             Grow();
         }
         SetWatered(false);
-    }
-
-    private void SetWatered(bool watered) {
-        temp_wateredIcon.SetActive(watered);
-        m_watered = watered;
     }
 }

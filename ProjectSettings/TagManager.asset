@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Soil
+    uniqueID: 2285223309
+    locked: 0
+  - name: WateredSoil
+    uniqueID: 3829680669
+    locked: 0
+  - name: Plants
+    uniqueID: 2368776001
+    locked: 0
+  - name: Seeds
+    uniqueID: 1102227961
+    locked: 0

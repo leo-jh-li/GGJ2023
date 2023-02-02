@@ -5,7 +5,11 @@ using System.Linq;
 
 public class GameManager : Singleton<GameManager> {
 
+    [Header("References")]
+    [SerializeField]
+    private PlantLibrary m_plantLibrary;
 
+    [Header("Game Values")]
     [SerializeField, Tooltip("The number of days over which the game takes place.")]
     private int m_numberOfDays;
     [SerializeField, Tooltip("The number of the current day.")]
@@ -94,5 +98,9 @@ public class GameManager : Singleton<GameManager> {
 
     public void DebugSkipMove() {
         OnPerformMove();
+    }
+
+    public PlantEntity GetRandomPlant() {
+        return m_plantLibrary.GetRandomPlant();
     }
 }
