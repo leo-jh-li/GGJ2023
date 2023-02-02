@@ -6,8 +6,8 @@ using System.Linq;
 public class GameManager : Singleton<GameManager> {
 
     [Header("References")]
-    [SerializeField]
-    private PlantLibrary m_plantLibrary;
+    [SerializeField] private PlantLibrary m_plantLibrary;
+    [SerializeField] private List<GardenBed> m_gardenBeds;
 
     [Header("Game Values")]
     [SerializeField, Tooltip("The number of days over which the game takes place.")]
@@ -83,10 +83,8 @@ public class GameManager : Singleton<GameManager> {
 
     private void EndDay() {
         Debug.Log($"End day {day}");
-        // TODO: temp Find by name
-        var plants = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name.StartsWith("PlantEntity"));
-        foreach (GameObject plant in plants) {
-            plant.GetComponent<PlantEntity>().OnNewDay();
+        foreach (GardenBed gardenBed in m_gardenBeds) {
+            gardenBed.OnNewDay();
         }
         day++;
         RefreshMoves();
