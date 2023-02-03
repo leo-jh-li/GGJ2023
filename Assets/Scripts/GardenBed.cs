@@ -62,6 +62,11 @@ public class GardenBed : MonoBehaviour {
         m_watered = watered;
     }
 
+    private void SetFertilized(bool fertilized) {
+        m_fertilized = fertilized;
+        m_fertilizedParticleSystem.SetActive(fertilized);
+    }
+
     public bool IsFertilized() {
         return m_fertilized;
     }
@@ -72,9 +77,8 @@ public class GardenBed : MonoBehaviour {
 
     public void TryFertilizePlant() {
         if (!CanFertilizePlant()) { return; }
-        m_fertilized = true;
-        m_fertilizedParticleSystem.SetActive(true);
-        // TODO: sparkly effects on plant entity
+        SetFertilized(true);
+        GameManager.instance.OnPerformMove();
     }
 
     // TODO: temp?
@@ -85,7 +89,7 @@ public class GardenBed : MonoBehaviour {
     private void HarvestPlant() {
         m_plantEntity.Harvest();
         m_plantEntity = null;
-        m_fertilizedParticleSystem.SetActive(false);
+        SetFertilized(false);
     }
 
     private void Interact() {
