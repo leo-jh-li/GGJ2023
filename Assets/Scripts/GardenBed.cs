@@ -7,9 +7,9 @@ public class GardenBed : MonoBehaviour {
     [Header("References")]
     // The plant planted here, or null if there isn't one
     private PlantEntity m_plantEntity;
+    [SerializeField] private GameObject TEMP_wateredBedSprite;
 
     private bool m_watered;
-    [SerializeField] private GameObject TEMP_wateredBedSprite;
 
     private void OnMouseOver() {
         if (Input.GetMouseButtonDown(0)) {

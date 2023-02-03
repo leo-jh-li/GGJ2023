@@ -1957,7 +1957,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2503,7 +2503,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_plantsList:
-  - {fileID: 2178779612908829920, guid: 37422f408ebb58447a27084b8444c2c2, type: 3}
+  - {fileID: 1617292166409236182, guid: de9a8c7dead781a4d84dc01f91a56c18, type: 3}
+  - {fileID: 8382796723561039085, guid: 43b6b67b390184042a828ad4ab27e435, type: 3}
+  - {fileID: 9104660959700898550, guid: 219f8c078d3fb4047aa6d13382a0bf06, type: 3}
+  - {fileID: 6100903060031542504, guid: 2bcb55fcb0e04b04980a9966624cae5d, type: 3}
 --- !u!1001 &2142662825
 PrefabInstance:
   m_ObjectHideFlags: 0
