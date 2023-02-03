@@ -71,6 +71,21 @@ public class GameManager : Singleton<GameManager> {
     public delegate void OnSeedQuantityChangeDelegate(int newVal);
     public event OnSeedQuantityChangeDelegate OnSeedQuantityChange;
 
+    [SerializeField, Tooltip("The number of fertilizer the player begins the game with.")]
+    private int m_startingFertilizerQuantity = 0;
+    private int m_fertilizerQuantity;
+    public int fertilizerQuantity {
+        get {return m_fertilizerQuantity;}
+        set {
+            if (m_fertilizerQuantity == value) return;
+            m_fertilizerQuantity = value;
+            if (OnFertilizerQuantityChange != null)
+                OnFertilizerQuantityChange(m_fertilizerQuantity);
+        }
+    }
+    public delegate void OnFertilizerQuantityChangeDelegate(int newVal);
+    public event OnFertilizerQuantityChangeDelegate OnFertilizerQuantityChange;
+
 
     private void Start() {
         m_numberOfDays = 28;
@@ -78,6 +93,7 @@ public class GameManager : Singleton<GameManager> {
         score = 0;
         RefreshMoves();
         seedQuantity = m_startingSeedQuantity;
+        fertilizerQuantity = m_startingFertilizerQuantity;
     }
 
     private void RefreshMoves() {   

@@ -7,9 +7,11 @@ public class GardenBed : MonoBehaviour {
     [Header("References")]
     // The plant planted here, or null if there isn't one
     private PlantEntity m_plantEntity;
+    [SerializeField] private GameObject m_fertilizedParticleSystem;
     [SerializeField] private GameObject TEMP_wateredBedSprite;
 
     private bool m_watered;
+    private bool m_fertilized;
 
     private void OnMouseOver() {
         if (Input.GetMouseButtonDown(0)) {
@@ -60,6 +62,21 @@ public class GardenBed : MonoBehaviour {
         m_watered = watered;
     }
 
+    public bool IsFertilized() {
+        return m_fertilized;
+    }
+
+    public bool CanFertilizePlant() {
+        return HasPlant() && !IsFertilized();
+    }
+
+    public void TryFertilizePlant() {
+        if (!CanFertilizePlant()) { return; }
+        m_fertilized = true;
+        m_fertilizedParticleSystem.SetActive(true);
+        // TODO: sparkly effects on plant entity
+    }
+
     // TODO: temp?
     private bool CanHarvestPlant() {
         return m_plantEntity.CanHarvest();
@@ -68,6 +85,7 @@ public class GardenBed : MonoBehaviour {
     private void HarvestPlant() {
         m_plantEntity.Harvest();
         m_plantEntity = null;
+        m_fertilizedParticleSystem.SetActive(false);
     }
 
     private void Interact() {

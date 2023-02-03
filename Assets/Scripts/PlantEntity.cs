@@ -58,10 +58,15 @@ public class PlantEntity : MonoBehaviour {
         }
     }
 
+    private int CalculatePointsValue() {
+        return m_gardenBed.IsFertilized() ? m_pointsValue * 2 : m_pointsValue;
+    }
+
     public void Harvest() {
+        int points = CalculatePointsValue();
         TextPopup text = Instantiate(m_textPopupPrefab, transform.position, Quaternion.identity).GetComponent<TextPopup>();
-        text.SetText($"+{m_pointsValue}");
-        GameManager.instance.AddScore(m_pointsValue);
+        text.SetText($"+{points}");
+        GameManager.instance.AddScore(points);
 
         // Grant seeds from harvesting
         // TODO: make more sophisticated, also guarantee seeds/increase seeds if player has low/no seeds

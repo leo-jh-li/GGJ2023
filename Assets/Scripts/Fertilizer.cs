@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeedEntity : DroppableTool {
+public class Fertilizer : DroppableTool {
 
     protected override void InteractWithGardenBed(GardenBed bed) {
-        if (!bed.HasPlant()) {
-            bed.PlantSeed();
+        if (bed.CanFertilizePlant()) {
+            bed.TryFertilizePlant();
             Destroy(gameObject);
             return;
         }
@@ -14,9 +14,8 @@ public class SeedEntity : DroppableTool {
     }
 
     protected override void ReturnItem() {
-        Debug.Log ("Seed returned");
-        // Return unused seed to collection
-        GameManager.instance.seedQuantity++;
+        // Return unused fertilizer to collection
+        GameManager.instance.fertilizerQuantity++;
         Destroy(gameObject);
     }
 }

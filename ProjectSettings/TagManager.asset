@@ -53,6 +53,9 @@ TagManager:
   - name: Seeds
     uniqueID: 1102227961
     locked: 0
+  - name: Effects
+    uniqueID: 2072035201
+    locked: 0
   - name: UI/PopupText
     uniqueID: 3312523527
     locked: 0

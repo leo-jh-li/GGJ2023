@@ -32,6 +32,7 @@ Transform:
   m_Children:
   - {fileID: 6264443925151670114}
   - {fileID: 3005721362160802419}
+  - {fileID: 2533525698849756919}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -73,6 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3921c2e4f166b4387b494d8a5e2bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fertilizedParticleSystem: {fileID: 157128763686980462}
   TEMP_wateredBedSprite: {fileID: 7535352206744211287}
 --- !u!1 &7316355750266812793
 GameObject:
@@ -242,3 +244,74 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &2920819216944087906
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7228012614329514275}
+    m_Modifications:
+    - target: {fileID: 837724134394107285, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 837724134394107285, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 837724134394107285, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.397
+      objectReference: {fileID: 0}
+    - target: {fileID: 837724134394107285, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 837724134394107285, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 837724134394107285, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 837724134394107285, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 837724134394107285, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 837724134394107285, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 837724134394107285, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 837724134394107285, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3073405880681187340, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+      propertyPath: m_Name
+      value: FertilizedParticleSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 3073405880681187340, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+--- !u!1 &157128763686980462 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3073405880681187340, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+  m_PrefabInstance: {fileID: 2920819216944087906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2533525698849756919 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 837724134394107285, guid: 5befbb59e07924640988ccb003f49a1b, type: 3}
+  m_PrefabInstance: {fileID: 2920819216944087906}
+  m_PrefabAsset: {fileID: 0}
