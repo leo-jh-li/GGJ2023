@@ -41,6 +41,10 @@ public class UIManager : Singleton<UIManager> {
         return worldPos;
     }
 
+    public void SeedToolPulse() {
+        m_seedTool.GetComponent<SeedTool>().PlayStoreSeedAnimation();
+    }
+
     // TODO: temp
     public void ShowGameOver() {
         TEMP_gameOver.SetActive(true);

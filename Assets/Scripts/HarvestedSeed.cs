@@ -14,13 +14,12 @@ public class HarvestedSeed : MonoBehaviour {
 
     private IEnumerator FlyToSeedCollection() {
         yield return new WaitForSeconds(m_timeBeforeFlight);
-        Debug.Log("FlyToSeedCollection");
         Vector3 destination = UIManager.instance.GetSeedToolPos();
         while (transform.position != destination) {
-            Debug.Log("flying");
             transform.position = Vector3.MoveTowards(transform.position, destination, m_flightSpeed * Time.deltaTime);
             yield return null;
         }
+        UIManager.instance.SeedToolPulse();
         Destroy(gameObject);
         GameManager.instance.seedQuantity++;
     }

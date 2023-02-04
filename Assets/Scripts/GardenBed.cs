@@ -9,6 +9,7 @@ public class GardenBed : MonoBehaviour {
     private PlantEntity m_plantEntity;
     [SerializeField] private GameObject m_fertilizedParticleSystem;
     [SerializeField] private SeedBurst m_seedBurst;
+    // TODO: remove
     [SerializeField] private GameObject TEMP_wateredBedSprite;
 
     private bool m_watered;
@@ -52,13 +53,10 @@ public class GardenBed : MonoBehaviour {
 
     private void Water() {
         Debug.Log($"Watered { gameObject.name }");
-        // TODO: temp
         SetWatered(true);
     }
 
     private void SetWatered(bool watered) {
-        // TODO: remove
-        // temp_wateredIcon.SetActive(watered);
         TEMP_wateredBedSprite.SetActive(watered);
         m_watered = watered;
     }

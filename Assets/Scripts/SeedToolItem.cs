@@ -14,7 +14,6 @@ public class SeedToolItem : DroppableTool {
     }
 
     protected override void ReturnItem() {
-        Debug.Log ("Seed returned");
         // Return unused seed to collection
         GameManager.instance.seedQuantity++;
         Destroy(gameObject);

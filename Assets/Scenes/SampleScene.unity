@@ -1865,6 +1865,7 @@ GameObject:
   - component: {fileID: 1084376786}
   - component: {fileID: 1084376785}
   - component: {fileID: 1084376787}
+  - component: {fileID: 1084376789}
   - component: {fileID: 1084376784}
   - component: {fileID: 1084376788}
   m_Layer: 5
@@ -1910,6 +1911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_seedEntityPrefab: {fileID: 4934008593321314020, guid: 386ab4ce9b03908459e6412bc8675ced, type: 3}
   m_seedQuantityDisplay: {fileID: 1185080396}
+  m_animation: {fileID: 1084376789}
 --- !u!114 &1084376785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2021,6 +2023,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &1084376789
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084376782}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 581b54dbbbcbb0840845df1ce455ca2b, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 581b54dbbbcbb0840845df1ce455ca2b, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1093488933
 GameObject:
   m_ObjectHideFlags: 0

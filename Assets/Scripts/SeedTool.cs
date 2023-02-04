@@ -6,6 +6,7 @@ using TMPro;
 public class SeedTool : MonoBehaviour {
     [SerializeField] private SeedToolItem m_seedEntityPrefab;
     [SerializeField] private TextMeshProUGUI m_seedQuantityDisplay;
+    [SerializeField] private Animation m_animation;
 
     private void OnEnable() {
         GameManager.instance.OnSeedQuantityChange += UpdateSeedQuantity;
@@ -27,5 +28,10 @@ public class SeedTool : MonoBehaviour {
         if (!CanRetrieveSeed()) { return; }
         GameManager.instance.seedQuantity--;
         Instantiate(m_seedEntityPrefab, Utils.GetMouseWorldPos(), Quaternion.identity);
+    }
+
+    // Plays animation for when a seed enters the seed collection
+    public void PlayStoreSeedAnimation() {
+        m_animation.Play();
     }
 }
