@@ -19,6 +19,17 @@ public class PlantEntity : MonoBehaviour {
     // The growth level at which this plant is harvestable
     private int m_harvestLevel;
 
+    // Returns a randomized number of seeds to gain after harvesting a plant
+    public static int GenerateSeedHarvest() {
+        // TODO: handle rare seeds...
+        int harvestedSeeds = Random.Range(0, 4) + Random.Range(0, 3);
+        if (GameManager.instance.seedQuantity == 0 && harvestedSeeds == 0) {
+            // Floor the seed harvest at 1 if player has no seeds (note that they could have plants in the garden though)
+            harvestedSeeds = 1;
+        }
+        return harvestedSeeds;
+    }
+
     private void Awake() {
         // Calculate harvestLevel
         m_harvestLevel = m_stages.Count - 1;
@@ -67,11 +78,6 @@ public class PlantEntity : MonoBehaviour {
         TextPopup text = Instantiate(m_textPopupPrefab, transform.position, Quaternion.identity).GetComponent<TextPopup>();
         text.SetText($"+{points}");
         GameManager.instance.AddScore(points);
-
-        // Grant seeds from harvesting
-        // TODO: make more sophisticated, also guarantee seeds/increase seeds if player has low/no seeds
-        GameManager.instance.seedQuantity += Random.Range(0, 5);
-        // TODO: temp
         Destroy(gameObject);
     }
 }

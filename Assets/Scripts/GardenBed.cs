@@ -8,6 +8,7 @@ public class GardenBed : MonoBehaviour {
     // The plant planted here, or null if there isn't one
     private PlantEntity m_plantEntity;
     [SerializeField] private GameObject m_fertilizedParticleSystem;
+    [SerializeField] private SeedBurst m_seedBurst;
     [SerializeField] private GameObject TEMP_wateredBedSprite;
 
     private bool m_watered;
@@ -90,6 +91,10 @@ public class GardenBed : MonoBehaviour {
         m_plantEntity.Harvest();
         m_plantEntity = null;
         SetFertilized(false);
+
+        // Spawn seeds from harvesting
+        int seedsHarvested = PlantEntity.GenerateSeedHarvest();
+        m_seedBurst.CreateSeedBurst(seedsHarvested);
     }
 
     private void Interact() {

@@ -387,6 +387,7 @@ MonoBehaviour:
   m_dayDisplay: {fileID: 1711581684}
   m_movesDisplay: {fileID: 756816155}
   m_scoreDisplay: {fileID: 388553079}
+  m_seedTool: {fileID: 1084376783}
   TEMP_gameOver: {fileID: 93561394}
 --- !u!1001 &210658257
 PrefabInstance:

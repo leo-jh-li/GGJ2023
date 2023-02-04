@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeedEntity : DroppableTool {
+public class SeedToolItem : DroppableTool {
 
     protected override void InteractWithGardenBed(GardenBed bed) {
         if (!bed.HasPlant()) {

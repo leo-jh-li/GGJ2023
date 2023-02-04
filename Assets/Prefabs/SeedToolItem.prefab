@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 723189375286329832}
   - component: {fileID: 4934008593321314020}
   m_Layer: 0
-  m_Name: SeedEntity
+  m_Name: SeedToolItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 public class SeedTool : MonoBehaviour {
-    [SerializeField] private SeedEntity m_seedEntityPrefab;
+    [SerializeField] private SeedToolItem m_seedEntityPrefab;
     [SerializeField] private TextMeshProUGUI m_seedQuantityDisplay;
 
     private void OnEnable() {
