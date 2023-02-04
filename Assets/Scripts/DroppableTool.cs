@@ -26,6 +26,11 @@ public abstract class DroppableTool : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(Utils.GetMouseWorldPos(), Vector2.zero);
         if (hit.collider != null) {
             GardenBed bed = hit.transform.GetComponent<GardenBed>();
+            // Borders on game jam code but it's clean
+            if (bed == null) {
+                // This collider may belong to a plant, to try to get the plant's GardenBed
+                bed = hit.transform.GetComponentInParent<GardenBed>();
+            }
             Debug.Log ("Dropped on: " + hit.collider.gameObject.name);
             Debug.Log ("Dropped at: " + transform.position);
             return bed;
