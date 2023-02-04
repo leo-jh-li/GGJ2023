@@ -19,7 +19,9 @@ public class GameManager : Singleton<GameManager> {
     [Tooltip("The current number of rare seeds that have dropped for the player this game.")]
     public int totalRareSeedDrops;
     [Tooltip("When seeds are harvested on or past this day and the player hasn't harvested a single rare seed yet, then guarantee a rare seed drop in the harvest.")]
-    public int guaranteedRareSeedDay;
+    public int chosenGuaranteedRareSeedDay;
+    [Tooltip("The range of the possible guaranteed rare seed days that can be chosen. Note range is max exclusive.")]
+    public Vector2Int chosenGuaranteedRareSeedDayRange;
 
     [SerializeField, Tooltip("The number of the current day.")]
     private int m_day;
@@ -117,6 +119,8 @@ public class GameManager : Singleton<GameManager> {
         // TODO: test - remove
         // rareSeedQuantity = 3;
         fertilizerQuantity = m_startingFertilizerQuantity;
+        // Randomize guaranteed rare seed day
+        chosenGuaranteedRareSeedDay = Random.Range(chosenGuaranteedRareSeedDayRange.x, chosenGuaranteedRareSeedDayRange.y);
     }
 
     private void RefreshMoves() {   
