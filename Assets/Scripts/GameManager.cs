@@ -18,6 +18,8 @@ public class GameManager : Singleton<GameManager> {
     public int maxRareSeedDrops;
     [Tooltip("The current number of rare seeds that have dropped for the player this game.")]
     public int totalRareSeedDrops;
+    [Tooltip("When seeds are harvested on or past this day and the player hasn't harvested a single rare seed yet, then guarantee a rare seed drop in the harvest.")]
+    public int guaranteedRareSeedDay;
 
     [SerializeField, Tooltip("The number of the current day.")]
     private int m_day;

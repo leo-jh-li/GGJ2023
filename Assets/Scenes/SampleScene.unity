@@ -3465,6 +3465,7 @@ MonoBehaviour:
   rareSeedChance: 0.03
   maxRareSeedDrops: 3
   totalRareSeedDrops: 0
+  guaranteedRareSeedDay: 23
   m_day: 0
   m_movesPerDay: 5
   m_remainingMoves: 0

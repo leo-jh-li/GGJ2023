@@ -9,7 +9,7 @@ public class HarvestedSeed : MonoBehaviour {
     [SerializeField] private GameObject m_normalSpriteObj;
     [SerializeField] private GameObject m_rareSpriteObj;
     private bool m_isRare;
-    
+
     private void Start() {
         StartCoroutine(FlyToSeedCollection());
     }

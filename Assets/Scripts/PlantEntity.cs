@@ -32,7 +32,10 @@ public class PlantEntity : MonoBehaviour {
         // Apply chance to transform some normal seeds into rare seeds
         int seedsConverted = 0;
         for (int i = 0; i < harvestedSeeds.x; i++) {
-            if (Random.value <= GameManager.instance.rareSeedChance && GameManager.instance.totalRareSeedDrops < GameManager.instance.maxRareSeedDrops) {
+            bool guaranteeRareSeed = GameManager.instance.day >= GameManager.instance.guaranteedRareSeedDay && GameManager.instance.totalRareSeedDrops == 0;
+            if ((Random.value <= GameManager.instance.rareSeedChance &&
+                 GameManager.instance.totalRareSeedDrops < GameManager.instance.maxRareSeedDrops) ||
+                 guaranteeRareSeed) {
                 seedsConverted++;
                 GameManager.instance.totalRareSeedDrops++;
             }
