@@ -3,28 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+// Seed Tool for normal seeds
 public class SeedTool : MonoBehaviour {
-    [SerializeField] private SeedToolItem m_seedEntityPrefab;
+    [SerializeField] protected SeedToolItem m_seedEntityPrefab;
     [SerializeField] private TextMeshProUGUI m_seedQuantityDisplay;
     [SerializeField] private Animation m_animation;
 
-    private void OnEnable() {
+    protected virtual void OnEnable() {
         GameManager.instance.OnSeedQuantityChange += UpdateSeedQuantity;
     }
 
-    private void OnDisable() {
+    protected virtual void OnDisable() {
         GameManager.instance.OnSeedQuantityChange -= UpdateSeedQuantity;
     }
 
-    private void UpdateSeedQuantity(int quantity) {
+    protected void UpdateSeedQuantity(int quantity) {
         m_seedQuantityDisplay.text = quantity.ToString();
     }
 
-    private bool CanRetrieveSeed() {
+    protected virtual bool CanRetrieveSeed() {
         return GameManager.instance.seedQuantity > 0;
     }
 
-    public void RetrieveSeed() {
+    public virtual void RetrieveSeed() {
         if (!CanRetrieveSeed()) { return; }
         GameManager.instance.seedQuantity--;
         Instantiate(m_seedEntityPrefab, Utils.GetMouseWorldPos(), Quaternion.identity);

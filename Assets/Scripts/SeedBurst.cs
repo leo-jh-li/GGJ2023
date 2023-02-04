@@ -7,14 +7,20 @@ public class SeedBurst : MonoBehaviour {
     [SerializeField] private HarvestedSeed m_harvestedSeedPrefab;
 
     // Creates seeds and makes them burst out from this position
-    public void CreateSeedBurst(int quantityToDrop) {
+    public void CreateSeedBurst(int normalSeeds, int rareSeeds) {
+        Debug.Log($"CreateSeedBurst: {normalSeeds}, {rareSeeds}");
+        int quantityToDrop = normalSeeds + rareSeeds;
         for (int i = 0 ; i < quantityToDrop; i++) {
             // TODO: temp: spawn randomly around plant
             Vector3 rand = new Vector3(Random.Range(-0.5f,0.5f), Random.Range(-0.5f,0.5f), 0);
             Quaternion randomRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
             HarvestedSeed seed = Instantiate(m_harvestedSeedPrefab, transform.position + rand, randomRotation);
+
+            // Make seed rare as appropriate
+            if (i >= normalSeeds) {
+                seed.SetToRare();
+            }
             // TODO: rotate seeds randomly?
-            // TODO: make seeds look rare if necessary?
             // TODO: add force in randomdirection. make simulate with a generated arc instead of using an rb?
             // TODO: make magnitudes approximately evenly spaced out?
 

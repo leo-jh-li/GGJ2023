@@ -25,9 +25,10 @@ public class GardenBed : MonoBehaviour {
         return m_plantEntity != null;
     }
 
-    public void PlantSeed() {
+    public void PlantSeed(bool seedIsRare) {
         // TODO: plant, randomize seed, possibly handle rare seeds
-        PlantEntity plant = Instantiate(GameManager.instance.GetRandomPlant(), transform);
+        PlantEntity plantToPlant = seedIsRare ? GameManager.instance.GetRarePlant() : GameManager.instance.GetRandomPlant();
+        PlantEntity plant = Instantiate(plantToPlant, transform);
         m_plantEntity = plant;
         plant.Initialize(this);
         GameManager.instance.OnPerformMove();
@@ -80,7 +81,6 @@ public class GardenBed : MonoBehaviour {
         GameManager.instance.OnPerformMove();
     }
 
-    // TODO: temp?
     private bool CanHarvestPlant() {
         return m_plantEntity.CanHarvest();
     }
@@ -91,8 +91,8 @@ public class GardenBed : MonoBehaviour {
         SetFertilized(false);
 
         // Spawn seeds from harvesting
-        int seedsHarvested = PlantEntity.GenerateSeedHarvest();
-        m_seedBurst.CreateSeedBurst(seedsHarvested);
+        Vector2Int seedsHarvested = PlantEntity.GenerateSeedHarvest();
+        m_seedBurst.CreateSeedBurst(seedsHarvested.x, seedsHarvested.y);
     }
 
     private void Interact() {

@@ -12,6 +12,13 @@ public class GameManager : Singleton<GameManager> {
     [Header("Game Values")]
     [SerializeField, Tooltip("The number of days over which the game takes place.")]
     private int m_numberOfDays;
+    [Tooltip("Chance for a harvested seed to become rare.")]
+    public float rareSeedChance;
+    [Tooltip("The max number of rare seeds that can drop in a game.")]
+    public int maxRareSeedDrops;
+    [Tooltip("The current number of rare seeds that have dropped for the player this game.")]
+    public int totalRareSeedDrops;
+
     [SerializeField, Tooltip("The number of the current day.")]
     private int m_day;
     public int day {
@@ -55,8 +62,7 @@ public class GameManager : Singleton<GameManager> {
     public delegate void OnScoreChangeDelegate(int newVal);
     public event OnScoreChangeDelegate OnScoreChange;
 
-
-    [SerializeField, Tooltip("The number of seeds the player begins the game with.")]
+    [SerializeField, Tooltip("The number of normal seeds the player begins the game with.")]
     private int m_startingSeedQuantity = 0;
     private int m_seedQuantity;
     public int seedQuantity {
@@ -70,6 +76,19 @@ public class GameManager : Singleton<GameManager> {
     }
     public delegate void OnSeedQuantityChangeDelegate(int newVal);
     public event OnSeedQuantityChangeDelegate OnSeedQuantityChange;
+
+    private int m_rareSeedQuantity;
+    public int rareSeedQuantity {
+        get {return m_rareSeedQuantity;}
+        set {
+            if (m_rareSeedQuantity == value) return;
+            m_rareSeedQuantity = value;
+            if (OnRareSeedQuantityChange != null)
+                OnRareSeedQuantityChange(m_rareSeedQuantity);
+        }
+    }
+    public delegate void OnRareSeedQuantityChangeDelegate(int newVal);
+    public event OnRareSeedQuantityChangeDelegate OnRareSeedQuantityChange;
 
     [SerializeField, Tooltip("The number of fertilizer the player begins the game with.")]
     private int m_startingFertilizerQuantity = 0;
@@ -86,13 +105,15 @@ public class GameManager : Singleton<GameManager> {
     public delegate void OnFertilizerQuantityChangeDelegate(int newVal);
     public event OnFertilizerQuantityChangeDelegate OnFertilizerQuantityChange;
 
-
     private void Start() {
         m_numberOfDays = 28;
         day = 1;
         score = 0;
         RefreshMoves();
         seedQuantity = m_startingSeedQuantity;
+        rareSeedQuantity = 0;
+        // TODO: test - remove
+        // rareSeedQuantity = 3;
         fertilizerQuantity = m_startingFertilizerQuantity;
     }
 
@@ -142,7 +163,15 @@ public class GameManager : Singleton<GameManager> {
         OnPerformMove();
     }
 
+    public void DebugEndDay() {
+        EndDay();
+    }
+
     public PlantEntity GetRandomPlant() {
         return m_plantLibrary.GetRandomPlant();
+    }
+
+    public PlantEntity GetRarePlant() {
+        return m_plantLibrary.GetRarePlant();
     }
 }

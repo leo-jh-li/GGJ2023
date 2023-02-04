@@ -19,14 +19,27 @@ public class PlantEntity : MonoBehaviour {
     // The growth level at which this plant is harvestable
     private int m_harvestLevel;
 
-    // Returns a randomized number of seeds to gain after harvesting a plant
-    public static int GenerateSeedHarvest() {
-        // TODO: handle rare seeds...
-        int harvestedSeeds = Random.Range(0, 4) + Random.Range(0, 3);
-        if (GameManager.instance.seedQuantity == 0 && harvestedSeeds == 0) {
+    // Returns a randomized number of normal seeds and rare seeds to gain after harvesting a plant.
+    // Pair of quantities is returned as a Vector2Int (x is normal quantity, y is rare quantity).
+    public static Vector2Int GenerateSeedHarvest() {
+        Vector2Int harvestedSeeds = Vector2Int.zero;
+        harvestedSeeds.x = Random.Range(0, 3) + Random.Range(0, 2);
+        if (GameManager.instance.seedQuantity == 0 && harvestedSeeds.x == 0) {
             // Floor the seed harvest at 1 if player has no seeds (note that they could have plants in the garden though)
-            harvestedSeeds = 1;
+            harvestedSeeds.x = 1;
         }
+
+        // Apply chance to transform some normal seeds into rare seeds
+        int seedsConverted = 0;
+        for (int i = 0; i < harvestedSeeds.x; i++) {
+            if (Random.value <= GameManager.instance.rareSeedChance && GameManager.instance.totalRareSeedDrops < GameManager.instance.maxRareSeedDrops) {
+                seedsConverted++;
+                GameManager.instance.totalRareSeedDrops++;
+            }
+        }
+
+        harvestedSeeds.x -= seedsConverted;
+        harvestedSeeds.y += seedsConverted;
         return harvestedSeeds;
     }
 
