@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlantType {
+    NONE,
+    ONE_STAGE,
+    TWO_STAGE,
+    THREE_STAGE,
+    FOUR_STAGE,
+    RARE
+}
+
 public class PlantEntity : MonoBehaviour {
     [Header("References")]
     // public GameObject temp_wateredIcon;
@@ -13,6 +22,7 @@ public class PlantEntity : MonoBehaviour {
     [SerializeField] private GameObject m_textPopupPrefab;
 
     [Header("Values")]
+    [SerializeField] private PlantType m_plantType;
     [SerializeField] private int m_pointsValue;
     // This plant's current level of maturity (starts at 0 when freshly planted)
     private int m_growthLevel;
@@ -94,6 +104,14 @@ public class PlantEntity : MonoBehaviour {
         TextPopup text = Instantiate(m_textPopupPrefab, transform.position, Quaternion.identity).GetComponent<TextPopup>();
         text.SetText($"+{points}");
         GameManager.instance.AddScore(points);
+
+        // Handle in demand plants
+        if (m_plantType == GameManager.instance.inDemandPlant) {
+            // TODO: grant loonie
+            // TODO: show icon/have sound indicated it was in demand; maybe collate with harvest icon and the text popup into one script?
+            GameManager.instance.AddLoonie(1);
+        }
+
         Destroy(gameObject);
     }
 }

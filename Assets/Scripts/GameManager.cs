@@ -22,6 +22,14 @@ public class GameManager : Singleton<GameManager> {
     public int chosenGuaranteedRareSeedDay;
     [Tooltip("The range of the possible guaranteed rare seed days that can be chosen. Note range is max exclusive.")]
     public Vector2Int chosenGuaranteedRareSeedDayRange;
+    [Tooltip("The number of days a plant stays in demand before the plant is changed.")]
+    public int inDemandDuration;
+    // List of PlantTypes that have yet to be in demand this game
+    private List<PlantType> m_inDemandQueue;
+    // TODO: remove, unnecessary
+    // Set of PlantTypes that have been in demand this game (includes the current in demand PlantType)
+    private HashSet<PlantType> m_inDemandHistory;
+    public PlantType inDemandPlant;
 
     [SerializeField, Tooltip("The number of the current day.")]
     private int m_day;
@@ -66,6 +74,19 @@ public class GameManager : Singleton<GameManager> {
     public delegate void OnScoreChangeDelegate(int newVal);
     public event OnScoreChangeDelegate OnScoreChange;
 
+    private int m_loonies;
+    public int loonies {
+        get {return m_loonies;}
+        set {
+            if (m_loonies == value) return;
+            m_loonies = value;
+            if (OnLooniesChange != null)
+                OnLooniesChange(m_loonies);
+        }
+    }
+    public delegate void OnLooniesChangeDelegate(int newVal);
+    public event OnLooniesChangeDelegate OnLooniesChange;
+
     [SerializeField, Tooltip("The number of normal seeds the player begins the game with.")]
     private int m_startingSeedQuantity = 0;
     private int m_seedQuantity;
@@ -109,15 +130,20 @@ public class GameManager : Singleton<GameManager> {
     public delegate void OnFertilizerQuantityChangeDelegate(int newVal);
     public event OnFertilizerQuantityChangeDelegate OnFertilizerQuantityChange;
 
+    private void Awake() {
+        m_inDemandHistory = new HashSet<PlantType>();
+
+        // Populate in demand queue with every plant that can be in demand
+        m_inDemandQueue = new List<PlantType>(new PlantType[] { PlantType.ONE_STAGE, PlantType.TWO_STAGE, PlantType.THREE_STAGE, PlantType.FOUR_STAGE });
+        Utils.Shuffle<PlantType>(m_inDemandQueue);
+    }
+
     private void Start() {
-        m_numberOfDays = 28;
-        day = 1;
         score = 0;
-        RefreshMoves();
+        m_numberOfDays = 28;
+        OnNewDay();
         seedQuantity = m_startingSeedQuantity;
         rareSeedQuantity = 0;
-        // TODO: test - remove
-        // rareSeedQuantity = 3;
         fertilizerQuantity = m_startingFertilizerQuantity;
         // Randomize guaranteed rare seed day
         chosenGuaranteedRareSeedDay = Random.Range(chosenGuaranteedRareSeedDayRange.x, chosenGuaranteedRareSeedDayRange.y);
@@ -142,8 +168,45 @@ public class GameManager : Singleton<GameManager> {
         score += value;
     }
 
+    public void AddLoonie(int value) {
+        loonies += value;
+    }
+
     private bool IsFinalDay() {
         return day == m_numberOfDays;
+    }
+
+    private PlantType PopFavouredPlant() {
+        PlantType ret = m_inDemandQueue[0];
+        m_inDemandQueue.RemoveAt(0);
+        return ret;
+    }
+
+    private bool TimeToChangeFavouredPlant() {
+        return (day - 1) % inDemandDuration == 0;
+    }
+
+    private void HandleFavouredPlant() {
+        if (TimeToChangeFavouredPlant()) {
+            if (m_inDemandQueue.Count == 0) {
+                Debug.LogWarning("No valid PlantType to become in demand.");
+                return;
+            }
+
+            PlantType nextInDemand = PopFavouredPlant();
+            m_inDemandHistory.Add(inDemandPlant);
+            inDemandPlant = nextInDemand;
+            UIManager.instance.UpdateInDemandPlant(inDemandPlant);
+
+            
+            Debug.Log($"New favoured plant: {inDemandPlant}");
+        }
+    }
+
+    private void OnNewDay() {
+        day++;
+        RefreshMoves();
+        HandleFavouredPlant();
     }
 
     private void EndDay() {
@@ -152,8 +215,7 @@ public class GameManager : Singleton<GameManager> {
             gardenBed.OnNewDay();
         }
         if (!IsFinalDay()) {
-            day++;
-            RefreshMoves();
+            OnNewDay();
         } else {
             EndGame();
         }
