@@ -104,6 +104,7 @@ public class PlantEntity : MonoBehaviour {
         TextPopup text = Instantiate(m_textPopupPrefab, transform.position, Quaternion.identity).GetComponent<TextPopup>();
         text.SetText($"+{points}");
         GameManager.instance.AddScore(points);
+        AudioManager.instance.Play(Constants.instance.HARVEST_PLANT);
 
         // Handle in demand plants
         if (m_plantType == GameManager.instance.inDemandPlant) {

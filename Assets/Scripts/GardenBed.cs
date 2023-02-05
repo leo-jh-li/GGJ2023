@@ -26,11 +26,11 @@ public class GardenBed : MonoBehaviour {
     }
 
     public void PlantSeed(bool seedIsRare) {
-        // TODO: plant, randomize seed, possibly handle rare seeds
         PlantEntity plantToPlant = seedIsRare ? GameManager.instance.GetRarePlant() : GameManager.instance.GetRandomPlant();
         PlantEntity plant = Instantiate(plantToPlant, transform);
         m_plantEntity = plant;
         plant.Initialize(this);
+        AudioManager.instance.Play(Constants.instance.PLANT_SEED);
         GameManager.instance.OnPerformMove();
     }
 
