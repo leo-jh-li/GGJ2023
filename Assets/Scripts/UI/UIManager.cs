@@ -13,8 +13,7 @@ public class UIManager : Singleton<UIManager> {
     [SerializeField] private Transform m_rareSeedTool;
     [SerializeField] private GameObject TEMP_gameOver;
     [SerializeField, Tooltip("List of images that correspond to each PlantType that can be in demand (indices must match the enum values).")]
-    private List<Sprite> m_plantImages;
-    [SerializeField] private Image m_inDemandPlantImage;
+    private List<GameObject> m_plantImages;
 
     private void OnEnable() {
         GameManager.instance.OnDayChange += UpdateDay;
@@ -59,7 +58,15 @@ public class UIManager : Singleton<UIManager> {
     }
 
     public void UpdateInDemandPlant(PlantType plantType) {
-        m_inDemandPlantImage.sprite = m_plantImages[(int) plantType];
+        // Deactivate all current plant images
+        for (int i = 0; i < m_plantImages.Count; i++) {
+            Debug.Log($"i: {i}");
+            GameObject plantImage = m_plantImages[i];
+            if (plantImage == null) { continue; }
+            plantImage.SetActive(false);
+        }
+        // Activate in demand plant
+        m_plantImages[(int) plantType].SetActive(true);
     }
 
     // TODO: temp

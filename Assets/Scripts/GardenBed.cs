@@ -54,6 +54,7 @@ public class GardenBed : MonoBehaviour {
 
     private void Water() {
         Debug.Log($"Watered { gameObject.name }");
+        AudioManager.instance.Play(Constants.instance.WATER_PLANT);
         SetWatered(true);
     }
 
@@ -78,6 +79,7 @@ public class GardenBed : MonoBehaviour {
     public void TryFertilizePlant() {
         if (!CanFertilizePlant()) { return; }
         SetFertilized(true);
+        AudioManager.instance.Play(Constants.instance.FERTILIZE_PLANT);
         GameManager.instance.OnPerformMove();
     }
 
