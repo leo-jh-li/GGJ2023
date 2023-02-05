@@ -100,14 +100,15 @@ public class PlantEntity : MonoBehaviour {
     }
 
     public void Harvest() {
+        bool inDemand = m_plantType == GameManager.instance.inDemandPlant;
         int points = CalculatePointsValue();
         TextPopup text = Instantiate(m_textPopupPrefab, transform.position, Quaternion.identity).GetComponent<TextPopup>();
-        text.SetText($"+{points}");
+        text.InitializePopup(points, m_gardenBed.IsFertilized(), inDemand);
         GameManager.instance.AddScore(points);
         AudioManager.instance.Play(Constants.instance.HARVEST_PLANT);
 
         // Handle in demand plants
-        if (m_plantType == GameManager.instance.inDemandPlant) {
+        if (inDemand) {
             // TODO: grant loonie
             // TODO: show icon/have sound indicated it was in demand; maybe collate with harvest icon and the text popup into one script?
             GameManager.instance.AddLoonie(1);
