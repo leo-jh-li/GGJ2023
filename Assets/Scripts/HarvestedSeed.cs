@@ -36,5 +36,6 @@ public class HarvestedSeed : MonoBehaviour {
         } else {
             GameManager.instance.seedQuantity++;
         }
+        AudioManager.instance.Play(Constants.instance.COLLECT_SEEDS);
     }
 }

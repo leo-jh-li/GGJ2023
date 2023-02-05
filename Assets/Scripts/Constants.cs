@@ -9,4 +9,6 @@ public class Constants : Singleton<Constants> {
     [Header("Sound Names")]
     public string[] PLANT_SEED;
     public string[] HARVEST_PLANT;
+    public string COLLECT_SEEDS;
+
 }
