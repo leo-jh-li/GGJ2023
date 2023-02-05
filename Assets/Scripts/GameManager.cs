@@ -26,9 +26,6 @@ public class GameManager : Singleton<GameManager> {
     public int inDemandDuration;
     // List of PlantTypes that have yet to be in demand this game
     private List<PlantType> m_inDemandQueue;
-    // TODO: remove, unnecessary
-    // Set of PlantTypes that have been in demand this game (includes the current in demand PlantType)
-    private HashSet<PlantType> m_inDemandHistory;
     public PlantType inDemandPlant;
 
     [SerializeField, Tooltip("The number of the current day.")]
@@ -131,8 +128,6 @@ public class GameManager : Singleton<GameManager> {
     public event OnFertilizerQuantityChangeDelegate OnFertilizerQuantityChange;
 
     private void Awake() {
-        m_inDemandHistory = new HashSet<PlantType>();
-
         // Populate in demand queue with every plant that can be in demand
         m_inDemandQueue = new List<PlantType>(new PlantType[] { PlantType.ONE_STAGE, PlantType.TWO_STAGE, PlantType.THREE_STAGE, PlantType.FOUR_STAGE });
         Utils.Shuffle<PlantType>(m_inDemandQueue);
@@ -194,11 +189,9 @@ public class GameManager : Singleton<GameManager> {
             }
 
             PlantType nextInDemand = PopFavouredPlant();
-            m_inDemandHistory.Add(inDemandPlant);
             inDemandPlant = nextInDemand;
             UIManager.instance.UpdateInDemandPlant(inDemandPlant);
 
-            
             Debug.Log($"New favoured plant: {inDemandPlant}");
         }
     }

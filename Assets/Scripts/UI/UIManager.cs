@@ -30,19 +30,19 @@ public class UIManager : Singleton<UIManager> {
         GameManager.instance.OnLooniesChange -= UpdateLoonies;
     }
 
-    public void UpdateDay(int day) {
+    private void UpdateDay(int day) {
         m_dayDisplay.text = $"Day {day}";
     }
 
-    public void UpdateMoves(int remainingMoves) {
+    private void UpdateMoves(int remainingMoves) {
         m_movesDisplay.text = $"Moves: {remainingMoves}";
     }
 
-    public void UpdateScore(int score) {
+    private void UpdateScore(int score) {
         m_scoreDisplay.text = $"Score: {score}";
     }
 
-    public void UpdateLoonies(int loonies) {
+    private void UpdateLoonies(int loonies) {
         m_looniesDisplay.text = $"Loonies: {loonies}";
     }
 
