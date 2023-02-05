@@ -461,7 +461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2178779612908829920, guid: 37422f408ebb58447a27084b8444c2c2, type: 3}
       propertyPath: m_stages.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2178779612908829920, guid: 37422f408ebb58447a27084b8444c2c2, type: 3}
       propertyPath: m_stages.Array.data[0]
@@ -470,11 +470,31 @@ PrefabInstance:
     - target: {fileID: 2178779612908829920, guid: 37422f408ebb58447a27084b8444c2c2, type: 3}
       propertyPath: m_stages.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2432550963437425829}
     - target: {fileID: 2178779612908829920, guid: 37422f408ebb58447a27084b8444c2c2, type: 3}
       propertyPath: m_stages.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 534802169690287126}
+    - target: {fileID: 2178779612908829920, guid: 37422f408ebb58447a27084b8444c2c2, type: 3}
+      propertyPath: m_stages.Array.data[3]
+      value: 
+      objectReference: {fileID: 1205626199374247411}
+    - target: {fileID: 2178779612908829920, guid: 37422f408ebb58447a27084b8444c2c2, type: 3}
+      propertyPath: m_stages.Array.data[4]
+      value: 
+      objectReference: {fileID: 7432674433176769254}
+    - target: {fileID: 2178779612908829920, guid: 37422f408ebb58447a27084b8444c2c2, type: 3}
+      propertyPath: m_stages.Array.data[5]
+      value: 
+      objectReference: {fileID: 7432674433176769254}
+    - target: {fileID: 2178779612908829920, guid: 37422f408ebb58447a27084b8444c2c2, type: 3}
+      propertyPath: m_stages.Array.data[6]
+      value: 
+      objectReference: {fileID: 7432674433176769254}
+    - target: {fileID: 2178779612908829920, guid: 37422f408ebb58447a27084b8444c2c2, type: 3}
+      propertyPath: m_stages.Array.data[7]
+      value: 
+      objectReference: {fileID: 7432674433176769254}
     - target: {fileID: 2178779612908829921, guid: 37422f408ebb58447a27084b8444c2c2, type: 3}
       propertyPath: m_Name
       value: PlantEntity (Rare) Variant
