@@ -202,7 +202,7 @@ public class GameManager : Singleton<GameManager> {
         HandleFavouredPlant();
     }
 
-    private void EndDay() {
+    public void EndDay() {
         Debug.Log($"End day {day}");
         foreach (GardenBed gardenBed in m_gardenBeds) {
             gardenBed.OnNewDay();
@@ -222,10 +222,6 @@ public class GameManager : Singleton<GameManager> {
 
     public void DebugSkipMove() {
         OnPerformMove();
-    }
-
-    public void DebugEndDay() {
-        EndDay();
     }
 
     public PlantEntity GetRandomPlant() {

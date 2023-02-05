@@ -13,5 +13,5 @@ public class Constants : Singleton<Constants> {
     public string[] FERTILIZE_PLANT;
 
     public string COLLECT_SEEDS;
-
+    public string LOONIE;
 }

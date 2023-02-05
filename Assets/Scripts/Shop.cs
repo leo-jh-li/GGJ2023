@@ -37,6 +37,7 @@ public class Shop : MonoBehaviour {
     public void TryBuyFertilizer() {
         if (CanBuyFertilizer()) {
             GameManager.instance.loonies -= m_fertilizerCost;
+            AudioManager.instance.Play(Constants.instance.LOONIE);
             GameManager.instance.fertilizerQuantity++;
             UpdateAvailability();
         }
