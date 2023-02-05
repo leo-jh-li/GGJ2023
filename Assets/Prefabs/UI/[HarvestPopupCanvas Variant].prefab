@@ -232,7 +232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5045890719905271709, guid: 446ea22ecf8aec048bff96a1f884790a, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6064476942412315802, guid: 446ea22ecf8aec048bff96a1f884790a, type: 3}
       propertyPath: m_popupDuration

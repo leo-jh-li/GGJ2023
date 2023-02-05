@@ -91,7 +91,8 @@ public class PlantEntity : MonoBehaviour {
         m_growthLevel++;
         m_stages[m_growthLevel].SetActive(true);
         if (CanHarvest()) {
-            temp_harvestableIcon.SetActive(true);
+            // TODO: remove
+            // temp_harvestableIcon.SetActive(true);
         }
     }
 

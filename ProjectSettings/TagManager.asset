@@ -62,3 +62,6 @@ TagManager:
   - name: UI/DragToolItem
     uniqueID: 1045596471
     locked: 0
+  - name: GameOverScreen
+    uniqueID: 2589661159
+    locked: 0

@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Linq;
 
 public class GameManager : Singleton<GameManager> {
 
     [Header("References")]
+    [SerializeField] private GameObject m_menu;
+    [SerializeField] private GameObject m_game;
+    [SerializeField] private GameObject m_credits;
     [SerializeField] private PlantLibrary m_plantLibrary;
     [SerializeField] private List<GardenBed> m_gardenBeds;
 
@@ -136,12 +140,21 @@ public class GameManager : Singleton<GameManager> {
     private void Start() {
         score = 0;
         m_numberOfDays = 28;
-        OnNewDay();
         seedQuantity = m_startingSeedQuantity;
         rareSeedQuantity = 0;
         fertilizerQuantity = m_startingFertilizerQuantity;
         // Randomize guaranteed rare seed day
         chosenGuaranteedRareSeedDay = Random.Range(chosenGuaranteedRareSeedDayRange.x, chosenGuaranteedRareSeedDayRange.y);
+    }
+
+    public void StartGame() {
+        m_menu.SetActive(false);
+        m_game.SetActive(true);
+        OnNewDay();
+    }
+
+    public void ToggleCredits() {
+        m_credits.SetActive(!m_credits.activeSelf);
     }
 
     private void RefreshMoves() {   
@@ -177,12 +190,20 @@ public class GameManager : Singleton<GameManager> {
         return ret;
     }
 
-    private bool TimeToChangeFavouredPlant() {
+    private bool IsDayToChangeFavouredPlant(int day) {
         return (day - 1) % inDemandDuration == 0;
     }
 
+    public int NextDayToChangeFavouredPlant() {
+        int nextDay = day + 1;
+        while (!(IsDayToChangeFavouredPlant(nextDay))) {
+            nextDay++;
+        }
+        return nextDay;
+    }
+
     private void HandleFavouredPlant() {
-        if (TimeToChangeFavouredPlant()) {
+        if (IsDayToChangeFavouredPlant(day)) {
             if (m_inDemandQueue.Count == 0) {
                 Debug.LogWarning("No valid PlantType to become in demand.");
                 return;
@@ -190,7 +211,8 @@ public class GameManager : Singleton<GameManager> {
 
             PlantType nextInDemand = PopFavouredPlant();
             inDemandPlant = nextInDemand;
-            UIManager.instance.UpdateInDemandPlant(inDemandPlant);
+            // Don't play animation if it's day 1
+            UIManager.instance.UpdateInDemandPlant(inDemandPlant, day != 1);
 
             Debug.Log($"New favoured plant: {inDemandPlant}");
         }
@@ -203,6 +225,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void EndDay() {
+        if (day > m_numberOfDays) { return; }
         Debug.Log($"End day {day}");
         foreach (GardenBed gardenBed in m_gardenBeds) {
             gardenBed.OnNewDay();
@@ -215,13 +238,12 @@ public class GameManager : Singleton<GameManager> {
     }
 
     private void EndGame() {
-        // TODO
-        UIManager.instance.ShowGameOver();
-        Debug.Log("game over");
+        UIManager.instance.OnGameOver();
     }
 
-    public void DebugSkipMove() {
-        OnPerformMove();
+    public void ReturnToMenu() {
+        // TODO
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public PlantEntity GetRandomPlant() {

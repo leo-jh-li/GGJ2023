@@ -5,15 +5,18 @@ using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : Singleton<UIManager> {
+    [SerializeField] private GameObject m_gameCanvas;
     [SerializeField] private TextMeshProUGUI m_dayDisplay;
     [SerializeField] private TextMeshProUGUI m_movesDisplay;
     [SerializeField] private TextMeshProUGUI m_scoreDisplay;
     [SerializeField] private TextMeshProUGUI m_looniesDisplay;
     [SerializeField] private Transform m_seedTool;
     [SerializeField] private Transform m_rareSeedTool;
-    [SerializeField] private GameObject TEMP_gameOver;
-    [SerializeField, Tooltip("List of images that correspond to each PlantType that can be in demand (indices must match the enum values).")]
-    private List<GameObject> m_plantImages;
+    [SerializeField] private FavouredPlantDisplay m_favouredPlantDisplay;
+    [SerializeField, Tooltip("Interactable buttons to disable on game end.")]
+    private Button[] m_buttons;
+    [SerializeField] private GameObject m_gameOverScreen;
+    [SerializeField] private TextMeshProUGUI m_finalScore;
 
     private void OnEnable() {
         GameManager.instance.OnDayChange += UpdateDay;
@@ -57,19 +60,16 @@ public class UIManager : Singleton<UIManager> {
         seedTool.PlayStoreSeedAnimation();
     }
 
-    public void UpdateInDemandPlant(PlantType plantType) {
-        // Deactivate all current plant images
-        for (int i = 0; i < m_plantImages.Count; i++) {
-            GameObject plantImage = m_plantImages[i];
-            if (plantImage == null) { continue; }
-            plantImage.SetActive(false);
-        }
-        // Activate in demand plant
-        m_plantImages[(int) plantType].SetActive(true);
+    public void UpdateInDemandPlant(PlantType plantType, bool playAnimation) {
+        StartCoroutine(m_favouredPlantDisplay.UpdateInDemandPlant(plantType, playAnimation));
     }
 
-    // TODO: temp
-    public void ShowGameOver() {
-        TEMP_gameOver.SetActive(true);
+    public void OnGameOver() {
+        m_gameCanvas.SetActive(false);
+        foreach (Button button in m_buttons) {
+            button.interactable = false;
+        }
+        m_gameOverScreen.SetActive(true);
+        m_finalScore.text = GameManager.instance.score.ToString();
     }
 }
