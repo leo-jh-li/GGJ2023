@@ -1197,7 +1197,28 @@ MonoBehaviour:
   - name: plant3
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: c9d0de6a767e7634ebc5caaacb8f24ac, type: 3}
-    volume: 0.5
+    volume: 0.8
+    loop: 0
+    interruptible: 0
+    paused: 0
+  - name: plant4
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 61dfe788228ffdf42a548b3dd66866f0, type: 3}
+    volume: 0.8
+    loop: 0
+    interruptible: 0
+    paused: 0
+  - name: plant5
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 507657dca6681f94785416867ee2dd80, type: 3}
+    volume: 0.7
+    loop: 0
+    interruptible: 0
+    paused: 0
+  - name: plant6
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 08f9713064cda9c4aad177862f7725ef, type: 3}
+    volume: 0.8
     loop: 0
     interruptible: 0
     paused: 0
@@ -2465,6 +2486,9 @@ MonoBehaviour:
   - plant1
   - plant2
   - plant3
+  - plant4
+  - plant5
+  - plant6
   HARVEST_PLANT:
   - harvest1
   - harvest2
