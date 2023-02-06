@@ -49,7 +49,6 @@ public class UIManager : Singleton<UIManager> {
     }
 
     public void ToggleCredits() {
-        Debug.Log("Toggle");
         bool activatingCredits = !m_creditsPage.activeSelf;
         m_creditsPage.SetActive(activatingCredits);
         m_gameTitle.SetActive(!activatingCredits);

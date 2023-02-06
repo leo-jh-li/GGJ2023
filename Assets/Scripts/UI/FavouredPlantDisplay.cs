@@ -38,7 +38,6 @@ public class FavouredPlantDisplay : MonoBehaviour {
         }
         // Deactivate all current plant images
         for (int i = 0; i < m_plantImages.Count; i++) {
-            Debug.Log("i: {i}");
             GameObject plantImage = m_plantImages[i];
             if (plantImage == null) { continue; }
             plantImage.SetActive(false);

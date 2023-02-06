@@ -28,9 +28,8 @@ public class AudioManager : Singleton<AudioManager> {
     // May result in slightly inconsistent behaviour if the same sound set is played multiple times;
     // should be refactored before using outside of jam code.
     public void Play(params string[] names) {
-        string test = names[UnityEngine.Random.Range(0, names.Length)];
-        Debug.Log(test);
-        Play(test);
+        string randomSound = names[UnityEngine.Random.Range(0, names.Length)];
+        Play(randomSound);
     }
 
     public void Play(string name) {
