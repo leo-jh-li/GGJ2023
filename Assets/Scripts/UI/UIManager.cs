@@ -13,7 +13,6 @@ public class UIManager : Singleton<UIManager> {
     [SerializeField] private GameObject m_menuIcons;
 
     [Space]
-
     [SerializeField] private GameObject m_gameCanvas;
     [SerializeField] private TextMeshProUGUI m_dayDisplay;
     [SerializeField] private TextMeshProUGUI m_movesDisplay;
@@ -100,6 +99,6 @@ public class UIManager : Singleton<UIManager> {
             button.interactable = false;
         }
         m_gameOverScreen.SetActive(true);
-        m_finalScore.text = GameManager.instance.score.ToString();
+        m_finalScore.text = $"Final Score\n{GameManager.instance.score.ToString()}";
     }
 }
