@@ -238,7 +238,6 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void ReturnToMenu() {
-        // TODO
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

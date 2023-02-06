@@ -13,8 +13,6 @@ public enum PlantType {
 
 public class PlantEntity : MonoBehaviour {
     [Header("References")]
-    // public GameObject temp_wateredIcon;
-    public GameObject temp_harvestableIcon;
     // The GardenBed in which this plant is planted
     private GardenBed m_gardenBed;
     [SerializeField, Tooltip("List of all the children of StageSprites.")]
@@ -88,10 +86,6 @@ public class PlantEntity : MonoBehaviour {
         m_stages[m_growthLevel].SetActive(false);
         m_growthLevel++;
         m_stages[m_growthLevel].SetActive(true);
-        if (CanHarvest()) {
-            // TODO: remove
-            // temp_harvestableIcon.SetActive(true);
-        }
     }
 
     private int CalculatePointsValue() {
