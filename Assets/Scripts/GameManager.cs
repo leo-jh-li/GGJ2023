@@ -137,7 +137,14 @@ public class GameManager : Singleton<GameManager> {
         Utils.Shuffle<PlantType>(m_inDemandQueue);
     }
 
-    private void Start() {
+    public void StartGame() {
+        m_menu.SetActive(false);
+        m_game.SetActive(true);
+        InitializeValues();
+        OnNewDay();
+    }
+
+    private void InitializeValues() {
         score = 0;
         m_numberOfDays = 28;
         seedQuantity = m_startingSeedQuantity;
@@ -145,12 +152,6 @@ public class GameManager : Singleton<GameManager> {
         fertilizerQuantity = m_startingFertilizerQuantity;
         // Randomize guaranteed rare seed day
         chosenGuaranteedRareSeedDay = Random.Range(chosenGuaranteedRareSeedDayRange.x, chosenGuaranteedRareSeedDayRange.y);
-    }
-
-    public void StartGame() {
-        m_menu.SetActive(false);
-        m_game.SetActive(true);
-        OnNewDay();
     }
 
     public void ToggleCredits() {

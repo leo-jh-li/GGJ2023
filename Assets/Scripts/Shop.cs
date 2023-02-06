@@ -8,6 +8,9 @@ public class Shop : MonoBehaviour {
     [SerializeField] private Button m_buyFertilizerButton;
     [SerializeField] private TextMeshProUGUI m_fertilizerCostText;
     [SerializeField] private int m_fertilizerCost;
+    [SerializeField] private Image m_fertilizerIcon;
+    [SerializeField] private Color m_unpurchaseableColour;
+    [SerializeField] private Animation m_animation;
 
     private void Awake() {
         m_fertilizerCostText.text = m_fertilizerCost.ToString();
@@ -23,11 +26,13 @@ public class Shop : MonoBehaviour {
     }
 
     private void UpdateAvailability() {
-        m_buyFertilizerButton.interactable = CanBuyFertilizer();
+        bool purchaseable = CanBuyFertilizer();
+        m_fertilizerIcon.color = purchaseable ? Color.white : m_unpurchaseableColour;
+        m_buyFertilizerButton.interactable = purchaseable;
     }
 
     private void UpdateAvailability(int loonies) {
-        m_buyFertilizerButton.interactable = CanBuyFertilizer();
+        UpdateAvailability();
     }
 
     private bool CanBuyFertilizer() {
@@ -36,6 +41,7 @@ public class Shop : MonoBehaviour {
 
     public void TryBuyFertilizer() {
         if (CanBuyFertilizer()) {
+            m_animation.Play();
             GameManager.instance.loonies -= m_fertilizerCost;
             AudioManager.instance.Play(Constants.instance.LOONIE);
             GameManager.instance.fertilizerQuantity++;

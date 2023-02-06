@@ -8,6 +8,9 @@ public class UIManager : Singleton<UIManager> {
     [SerializeField] private GameObject m_gameCanvas;
     [SerializeField] private TextMeshProUGUI m_dayDisplay;
     [SerializeField] private TextMeshProUGUI m_movesDisplay;
+    [SerializeField, Tooltip("The text colour when player has 1 move left for the day.")]
+    private Color m_lastMoveColour;
+    private string m_lastMoveColorHex;
     [SerializeField] private TextMeshProUGUI m_scoreDisplay;
     [SerializeField] private TextMeshProUGUI m_looniesDisplay;
     [SerializeField] private Transform m_seedTool;
@@ -17,6 +20,10 @@ public class UIManager : Singleton<UIManager> {
     private Button[] m_buttons;
     [SerializeField] private GameObject m_gameOverScreen;
     [SerializeField] private TextMeshProUGUI m_finalScore;
+
+    private void Awake () {
+        m_lastMoveColorHex = ColorUtility.ToHtmlStringRGB(m_lastMoveColour);
+    }
 
     private void OnEnable() {
         GameManager.instance.OnDayChange += UpdateDay;
@@ -37,7 +44,12 @@ public class UIManager : Singleton<UIManager> {
     }
 
     private void UpdateMoves(int remainingMoves) {
-        m_movesDisplay.text = $"Moves: {remainingMoves}";
+        // Make text red if there's one move left
+        if (remainingMoves == 1) {
+            m_movesDisplay.text = $"Moves: <color=#{m_lastMoveColorHex}>{remainingMoves}";
+        } else {
+            m_movesDisplay.text = $"Moves: {remainingMoves}";
+        }
     }
 
     private void UpdateScore(int score) {

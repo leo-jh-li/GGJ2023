@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-// Seed Tool for normal seeds
 public class SeedTool : MonoBehaviour {
     [SerializeField] protected SeedToolItem m_seedEntityPrefab;
     [SerializeField] private TextMeshProUGUI m_seedQuantityDisplay;
-    [SerializeField] private Animation m_animation;
+    [SerializeField] private Animator m_anim;
 
     protected virtual void OnEnable() {
         GameManager.instance.OnSeedQuantityChange += UpdateSeedQuantity;
@@ -27,12 +26,13 @@ public class SeedTool : MonoBehaviour {
 
     public virtual void RetrieveSeed() {
         if (!CanRetrieveSeed()) { return; }
+        m_anim.SetTrigger("Shrink");
         GameManager.instance.seedQuantity--;
         Instantiate(m_seedEntityPrefab, Utils.GetMouseWorldPos(), Quaternion.identity);
     }
 
     // Plays animation for when a seed enters the seed collection
     public void PlayStoreSeedAnimation() {
-        m_animation.Play();
+        m_anim.SetTrigger("Pulse");
     }
 }
