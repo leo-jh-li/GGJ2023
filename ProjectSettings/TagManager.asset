@@ -65,3 +65,9 @@ TagManager:
   - name: GameOverScreen
     uniqueID: 2589661159
     locked: 0
+  - name: Title Screen/Background
+    uniqueID: 327500539
+    locked: 0
+  - name: Title Screen/Icon
+    uniqueID: 3300300357
+    locked: 0

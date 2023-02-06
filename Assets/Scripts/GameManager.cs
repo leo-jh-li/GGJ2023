@@ -9,7 +9,6 @@ public class GameManager : Singleton<GameManager> {
     [Header("References")]
     [SerializeField] private GameObject m_menu;
     [SerializeField] private GameObject m_game;
-    [SerializeField] private GameObject m_credits;
     [SerializeField] private PlantLibrary m_plantLibrary;
     [SerializeField] private List<GardenBed> m_gardenBeds;
 
@@ -25,7 +24,7 @@ public class GameManager : Singleton<GameManager> {
     [Tooltip("When seeds are harvested on or past this day and the player hasn't harvested a single rare seed yet, then guarantee a rare seed drop in the harvest.")]
     public int chosenGuaranteedRareSeedDay;
     [Tooltip("The range of the possible guaranteed rare seed days that can be chosen. Note range is max exclusive.")]
-    public Vector2Int chosenGuaranteedRareSeedDayRange;
+    public RandomRangeInt chosenGuaranteedRareSeedDayRange;
     [Tooltip("The number of days a plant stays in demand before the plant is changed.")]
     public int inDemandDuration;
     // List of PlantTypes that have yet to be in demand this game
@@ -151,11 +150,7 @@ public class GameManager : Singleton<GameManager> {
         rareSeedQuantity = 0;
         fertilizerQuantity = m_startingFertilizerQuantity;
         // Randomize guaranteed rare seed day
-        chosenGuaranteedRareSeedDay = Random.Range(chosenGuaranteedRareSeedDayRange.x, chosenGuaranteedRareSeedDayRange.y);
-    }
-
-    public void ToggleCredits() {
-        m_credits.SetActive(!m_credits.activeSelf);
+        chosenGuaranteedRareSeedDay = chosenGuaranteedRareSeedDayRange.GetRandom();
     }
 
     private void RefreshMoves() {   

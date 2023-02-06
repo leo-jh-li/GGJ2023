@@ -5,6 +5,15 @@ using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : Singleton<UIManager> {
+    [Header("Menu Objects")]
+    [SerializeField] private GameObject m_gameTitle;
+    [SerializeField] private GameObject m_startButton;
+    [SerializeField] private GameObject m_creditsPage;
+    [SerializeField] private TextMeshProUGUI m_creditsButtonText;
+    [SerializeField] private GameObject m_menuIcons;
+
+    [Space]
+
     [SerializeField] private GameObject m_gameCanvas;
     [SerializeField] private TextMeshProUGUI m_dayDisplay;
     [SerializeField] private TextMeshProUGUI m_movesDisplay;
@@ -37,6 +46,16 @@ public class UIManager : Singleton<UIManager> {
         GameManager.instance.OnRemainingMovesChange -= UpdateMoves;
         GameManager.instance.OnScoreChange -= UpdateScore;
         GameManager.instance.OnLooniesChange -= UpdateLoonies;
+    }
+
+    public void ToggleCredits() {
+        Debug.Log("Toggle");
+        bool activatingCredits = !m_creditsPage.activeSelf;
+        m_creditsPage.SetActive(activatingCredits);
+        m_gameTitle.SetActive(!activatingCredits);
+        m_startButton.SetActive(!activatingCredits);
+        m_menuIcons.SetActive(!activatingCredits);
+        m_creditsButtonText.text = activatingCredits ? "Back" : "Credits";
     }
 
     private void UpdateDay(int day) {

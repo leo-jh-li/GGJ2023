@@ -11,6 +11,7 @@ public class FavouredPlantDisplay : MonoBehaviour {
     private Vector3 m_parchmentMovement;
     private Vector3 m_parchmentDestination;
     [SerializeField] private float m_parchmentSlideSpeed;
+    private bool m_parchmentInMotion;
     [SerializeField] private TextMeshProUGUI m_untilDate;
     [SerializeField, Tooltip("List of images that correspond to each PlantType that can be in demand (indices must match the enum values).")]
     private List<GameObject> m_plantImages;
@@ -22,10 +23,14 @@ public class FavouredPlantDisplay : MonoBehaviour {
         m_favouredPlantDisplayInitialized = true;
     }
 
-
     public IEnumerator UpdateInDemandPlant(PlantType plantType, bool playAnimation) {
+        bool lockMotion = false;
+        if (m_parchmentInMotion) {
+            lockMotion = true;
+        }
         // Play animation of paper sliding out then in unless otherwise indicated (i.e., if it's day 1)
-        if (playAnimation) {
+        if (playAnimation && !lockMotion) {
+            m_parchmentInMotion = true;
             while (m_favouredPlantDisplay.position != m_parchmentDestination) {
                 m_favouredPlantDisplay.position = Vector3.MoveTowards(m_favouredPlantDisplay.position, m_parchmentDestination, m_parchmentSlideSpeed * Time.deltaTime);
                 yield return null;
@@ -41,11 +46,12 @@ public class FavouredPlantDisplay : MonoBehaviour {
         // Activate in demand plant
         m_plantImages[(int) plantType].SetActive(true);
         m_untilDate.text = $"Until Day { GameManager.instance.NextDayToChangeFavouredPlant() }";
-        if (playAnimation) {
+        if (playAnimation && !lockMotion) {
             while (m_favouredPlantDisplay.position != m_parchmentStartPos) {
                 m_favouredPlantDisplay.position = Vector3.MoveTowards(m_favouredPlantDisplay.position, m_parchmentStartPos, m_parchmentSlideSpeed * Time.deltaTime);
                 yield return null;
             }
+            m_parchmentInMotion = false;
         }
     }
 
