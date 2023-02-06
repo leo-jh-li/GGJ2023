@@ -7,10 +7,10 @@ public class GardenBed : MonoBehaviour {
     [Header("References")]
     // The plant planted here, or null if there isn't one
     private PlantEntity m_plantEntity;
+    [SerializeField] private GameObject m_wateredBed;
+    [SerializeField] private GameObject m_harvestableParticleSystem;
     [SerializeField] private GameObject m_fertilizedParticleSystem;
     [SerializeField] private SeedBurst m_seedBurst;
-    // TODO: remove
-    [SerializeField] private GameObject TEMP_wateredBedSprite;
 
     private bool m_watered;
     private bool m_fertilized;
@@ -41,7 +41,6 @@ public class GardenBed : MonoBehaviour {
     }
 
     private bool CanInteract() {
-        // TODO: check player has actions, game is active (e.g. no animations/waits going on, game not paused etc.)
         if (!HasPlant() ||
             m_watered ||
             GameManager.instance.remainingMoves <= 0 ) { return false; }
@@ -59,7 +58,7 @@ public class GardenBed : MonoBehaviour {
     }
 
     private void SetWatered(bool watered) {
-        TEMP_wateredBedSprite.SetActive(watered);
+        m_wateredBed.SetActive(watered);
         m_watered = watered;
     }
 
@@ -84,6 +83,9 @@ public class GardenBed : MonoBehaviour {
     }
 
     private bool CanHarvestPlant() {
+        if (m_plantEntity == null) {
+            return false;
+        }
         return m_plantEntity.CanHarvest();
     }
 
@@ -91,6 +93,7 @@ public class GardenBed : MonoBehaviour {
         m_plantEntity.Harvest();
         m_plantEntity = null;
         SetFertilized(false);
+        m_harvestableParticleSystem.SetActive(false);
 
         // Spawn seeds from harvesting
         Vector2Int seedsHarvested = PlantEntity.GenerateSeedHarvest();
@@ -111,6 +114,9 @@ public class GardenBed : MonoBehaviour {
     public void OnNewDay() {
         if (m_watered) {
             m_plantEntity.Grow();
+        }
+        if (CanHarvestPlant()) {
+            m_harvestableParticleSystem.SetActive(true);
         }
         SetWatered(false);
     }

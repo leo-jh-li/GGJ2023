@@ -85,8 +85,6 @@ public class PlantEntity : MonoBehaviour {
     }
 
     public void Grow() {
-        // TODO: grow
-        // transform.localScale += new Vector3(0f, 1f, 0f);
         m_stages[m_growthLevel].SetActive(false);
         m_growthLevel++;
         m_stages[m_growthLevel].SetActive(true);
