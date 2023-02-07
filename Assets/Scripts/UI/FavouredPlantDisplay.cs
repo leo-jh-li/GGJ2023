@@ -44,7 +44,7 @@ public class FavouredPlantDisplay : MonoBehaviour {
         }
         // Activate in demand plant
         m_plantImages[(int) plantType].SetActive(true);
-        m_untilDate.text = $"Until Day { GameManager.instance.NextDayToChangeFavouredPlant() }";
+        m_untilDate.text = $"Ends on Day { GameManager.instance.LastDayOfCurrentInDemandPlant() }";
         if (playAnimation && !lockMotion) {
             while (m_favouredPlantDisplay.position != m_parchmentStartPos) {
                 m_favouredPlantDisplay.position = Vector3.MoveTowards(m_favouredPlantDisplay.position, m_parchmentStartPos, m_parchmentSlideSpeed * Time.deltaTime);

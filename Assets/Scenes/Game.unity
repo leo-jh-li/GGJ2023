@@ -4016,7 +4016,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -10, y: 26.51}
-  m_SizeDelta: {x: 100, y: 98.5}
+  m_SizeDelta: {x: 100, y: 197.38889}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1284601186
 MonoBehaviour:
@@ -4369,7 +4369,7 @@ GameObject:
   - component: {fileID: 1380639631}
   - component: {fileID: 1380639630}
   m_Layer: 5
-  m_Name: UntilDate
+  m_Name: EndsOnDate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4392,7 +4392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -36.6, y: -123.308464}
+  m_AnchoredPosition: {x: -36.15, y: -123.308464}
   m_SizeDelta: {x: 156.52, y: 35.6064}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1380639630
@@ -4415,7 +4415,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Until Day 28
+  m_text: Ends on Day 28
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9593321a2b9a6544e8557ec4c864cafb, type: 2}
   m_sharedMaterial: {fileID: -3003157982012681269, guid: 9593321a2b9a6544e8557ec4c864cafb, type: 2}
@@ -4442,8 +4442,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5729,7 +5729,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 90, y: 0}
+  m_AnchoredPosition: {x: 90, y: -49.444443}
   m_SizeDelta: {x: 80, y: 98.888885}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &2054551610
@@ -6028,7 +6028,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -58.5}
+  m_AnchoredPosition: {x: 50, y: -157.38889}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2115028161

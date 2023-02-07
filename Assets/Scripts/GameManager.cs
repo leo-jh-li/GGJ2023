@@ -190,12 +190,13 @@ public class GameManager : Singleton<GameManager> {
         return (day - 1) % inDemandDuration == 0;
     }
 
-    public int NextDayToChangeFavouredPlant() {
-        int nextDay = day + 1;
-        while (!(IsDayToChangeFavouredPlant(nextDay))) {
-            nextDay++;
+    public int LastDayOfCurrentInDemandPlant() {
+        int lastDay = day + 1;
+        while (!(IsDayToChangeFavouredPlant(lastDay))) {
+            lastDay++;
         }
-        return nextDay;
+        lastDay -= 1;
+        return lastDay;
     }
 
     private void HandleFavouredPlant() {
